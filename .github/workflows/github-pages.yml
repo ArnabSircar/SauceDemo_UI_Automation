@@ -1,4 +1,4 @@
-name: Deploy Allure Report to GitHub Pages
+name: Allure Report to Pages
 
 on:
   push:
@@ -10,16 +10,9 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: github-pages
-  cancel-in-progress: false
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.pages.outputs.url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,59 +28,20 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run tests (continue on failure)
+      - name: Run tests
         run: npx playwright test || true
-        env:
-          CI: true
 
       - name: Generate Allure report
         run: |
-          if [ -d "allure-results" ] && [ "$(ls -A allure-results 2>/dev/null)" ]; then
+          if [ -d "allure-results" ] && [ "$(ls -A allure-results)" ]; then
             npx allure generate allure-results --clean -o allure-report
-          else
-            echo "Creating placeholder structure"
-            mkdir -p allure-report/graph
-            mkdir -p allure-report/widgets
           fi
 
-      - name: Fix Allure index for GitHub Pages
-        run: |
-          # Fix the graph/index.html to work on GitHub Pages
-          if [ -f allure-report/graph/index.html ]; then
-            # Replace base path for GitHub Pages
-            sed -i 's|href=".."|href=".."|g' allure-report/graph/index.html || true
-            sed -i 's|src=".."|src=".."|g' allure-report/graph/index.html || true
-          fi
-          
-          # Create a proper index.html in the root that shows the main dashboard
-          cat > allure-report/index.html << 'EOF'
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SauceDemo Test Report - Allure</title>
-  <script>
-    // Redirect directly to the graph page
-    window.location.href = './graph/';
-  </script>
-  <noscript>
-    <meta http-equiv="refresh" content="0;url=graph/">
-  </noscript>
-</head>
-<body>
-  <p style="font-family: sans-serif; padding: 20px;">
-    Loading <a href="graph/">Allure Report</a>...
-  </p>
-</body>
-</html>
-EOF
-
-      - name: Upload artifact
+      - name: Upload to GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: allure-report/
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         uses: actions/deploy-pages@v4
-        id: pages
+        if: ${{ success() }}
