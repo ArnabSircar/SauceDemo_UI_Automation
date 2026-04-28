@@ -6,6 +6,17 @@ A comprehensive end-to-end UI automation framework for [SauceDemo](https://www.s
 ![Allure](https://img.shields.io/badge/Allure-Report-6e7681?style=for-the-badge)
 ![GitHub Actions](https://img.shields.io/badge/GitHub-Actions-2088ff?style=for-the-badge&logo=github)
 ![Node.js](https://img.shields.io/badge/Node.js-20+-339933?style=for-the-badge&logo=nodedotjs)
+![Tests](https://img.shields.io/badge/Tests-61 Passed-3fb950)
+![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-Deployed-2a9d8f)
+
+---
+
+## 🌐 Live Report Links
+
+| Report | URL |
+|--------|-----|
+| **Allure Dashboard** | https://ArnabSircar.github.io/SauceDemo_UI_Automation/graph/ |
+| **GitHub Actions** | https://github.com/ArnabSircar/SauceDemo_UI_Automation/actions |
 
 ---
 
@@ -358,3 +369,25 @@ For issues or questions, please open a GitHub issue.
 <p align="center">
   <strong>Built with ❤️ using Playwright & Allure</strong>
 </p>
+
+---
+
+## 🌐 Live Report Access
+
+### Allure Report on GitHub Pages
+
+After each push to `main`, the workflow automatically deploys the Allure report. Access it at:
+
+**https://ArnabSircar.github.io/SauceDemo_UI_Automation/graph/**
+
+### GitHub Actions
+
+View all test runs and download artifacts:
+
+**https://github.com/ArnabSircar/SauceDemo_UI_Automation/actions**
+
+### Quick Links
+
+- [Allure Dashboard](https://ArnabSircar.github.io/SauceDemo_UI_Automation/graph/)
+- [Workflow Runs](https://github.com/ArnabSircar/SauceDemo_UI_Automation/actions)
+- [latest Artifacts](https://github.com/ArnabSircar/SauceDemo_UI_Automation/actions)

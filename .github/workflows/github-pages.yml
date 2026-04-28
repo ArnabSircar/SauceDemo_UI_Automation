@@ -48,80 +48,19 @@ jobs:
             mkdir -p allure-report/widgets
           fi
 
-      - name: Create index.html
+      - name: Create index.html that redirects to graph
         run: |
           cat > allure-report/index.html << 'EOFINDEX'
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SauceDemo Test Report</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: white;
-    }
-    .container { text-align: center; padding: 40px; }
-    h1 { font-size: 48px; margin-bottom: 20px; }
-    .btn {
-      background: #58a6ff;
-      color: white;
-      padding: 16px 32px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: 600;
-      margin: 10px;
-      display: inline-block;
-    }
-    .btn:hover { background: #79c0ff; }
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin: 40px 0;
-    }
-    .stat {
-      background: rgba(255,255,255,0.1);
-      padding: 30px 50px;
-      border-radius: 12px;
-    }
-    .stat-number { font-size: 48px; font-weight: bold; }
-    .passed { color: #3fb950; }
-    .failed { color: #f85149; }
-    .total { color: #58a6ff; }
-  </style>
+  <meta http-equiv="refresh" content="0;url=graph/">
+  <title>Allure Report - Redirecting...</title>
 </head>
 <body>
-  <div class="container">
-    <h1>📊 SauceDemo Test Report</h1>
-    <p style="font-size: 20px; color: #8b949e; margin-bottom: 30px;">
-      Playwright + Allure Test Automation Results
-    </p>
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-number total">61</div>
-        <div>Total</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number passed">59</div>
-        <div>Passed</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number failed">2</div>
-        <div>Failed</div>
-      </div>
-    </div>
-    <a href="graph/" class="btn">View Allure Dashboard</a>
-  </div>
+  <p>Redirecting to <a href="graph/">Allure Report Dashboard</a>...</p>
+  <script>window.location.href = 'graph/';</script>
 </body>
 </html>
 EOFINDEX
